@@ -8,10 +8,10 @@ pipeline{
         BRANCH =  sh(returnStdout: true,script: 'echo $branch').trim()
       }
 
-      // 定义本次构建使用哪个标签的构建环境，本示例中为 “slave-pipeline”
+      // 定义本次构建使用哪个标签的构建环境，本示例中为 “ssh-slave”
       agent{
         node{
-          label 'slave-pipeline'
+          label 'ssh-slave'
         }
       }
 
@@ -20,7 +20,7 @@ pipeline{
         // 定义第一个stage， 完成克隆源码的任务
         stage('Git'){
           steps{
-            git branch: '${BRANCH}', credentialsId: '', url: 'https://github.com/AliyunContainerService/jenkins-demo.git'
+            git branch: '${BRANCH}', credentialsId: '', url: 'https://github.com/KLines/jenkins-demo.git'
           }
         }
 
